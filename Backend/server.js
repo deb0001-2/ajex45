@@ -1,25 +1,19 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./db/db');
+const http = require("http");
+const { handleRequest } = require("./src/router");
 
-// Initialize the app
-const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
-// Connect to Database
-connectDB();
-
-// Middlewares
-app.use(cors()); // Allows your frontend to communicate with your backend
-app.use(express.json()); // Allows your server to accept JSON data in requests
-
-// A simple test route
-app.get('/', (req, res) => {
-    res.send('API is running properly!');
+const server = http.createServer((req, res) => {
+  handleRequest(req, res).catch((err) => {
+    console.error("Unhandled error:", err);
+    if (!res.headersSent) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Internal server error" }));
+    }
+  });
 });
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`\n  Odo HRMS backend running at http://localhost:${PORT}`);
+  console.log(`  Try:  curl http://localhost:${PORT}/api/health\n`);
 });
