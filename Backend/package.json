@@ -1,46 +1,15 @@
 {
-  "name": "backend",
+  "name": "odo-hrms-backend",
   "version": "1.0.0",
-  "description": "HRMS REST API — Node.js + Express + TypeScript + MongoDB",
-  "main": "dist/server.js",
+  "description": "REST API backend for the Odo HRMS frontend. Zero external dependencies - pure Node.js.",
+  "private": true,
+  "main": "server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "start": "node dist/server.js",
-    "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "reset-db": "rm -f data/db.json && echo 'Database reset. It will be reseeded on next start.'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "axios": "^1.13.2",
-    "bcryptjs": "^3.0.3",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.5.2",
-    "helmet": "^8.2.0",
-    "jsonwebtoken": "^9.0.3",
-    "mongodb": "^7.4.0",
-    "mongoose": "^9.0.0",
-    "multer": "^2.2.0",
-    "nodemailer": "^9.0.3",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.23.0",
-    "typescript": "^6.0.3",
-    "uuid": "^14.0.1",
-    "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/multer": "^2.2.0",
-    "@types/nodemailer": "^8.0.1",
-    "@types/node": "^26.1.0",
-    "@types/uuid": "^10.0.0"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
-
